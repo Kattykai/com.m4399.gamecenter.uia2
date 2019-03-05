@@ -106,4 +106,12 @@ public class gameCenterPageClick extends autoTestBase{
 
         buttonRecord.setText("自动化测试");
     }
+    @Test
+    public void videoslide() throws InterruptedException {
+        for (int i = 1;i<200;i++){
+            device.swipe(1090,2000,1090,600,20);
+            Thread.sleep(5000);
+        }
+
+    }
     }
