@@ -2,10 +2,12 @@ package com.m4399.gamecentertest;
 
 import android.graphics.Point;
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
+import android.webkit.WebView;
 
 import org.junit.Test;
 
@@ -13,6 +15,7 @@ import java.io.IOException;
 
 public class gameCenterPageClick extends autoTestBase{
     //resourceID配置
+
     //非插件版本：com.m4399.gamecenter
     //主插件版本：com.m4399.gamecenter.plugin.main
     public String index = "com.m4399.gamecenter";
@@ -27,9 +30,9 @@ public class gameCenterPageClick extends autoTestBase{
         device.wait(Until.findObject(By.res(index+TV_TAB_TITLE)),5000);
         device.pressBack();
     }
-    //二维码扫描
+    //二维码扫描遍历
     @Test
-    public void urCode() throws IOException, InterruptedException {
+    public void urCode() throws InterruptedException, IOException {
         restartApp();
         device.findObject(By.res(index+RL_GAME_SEARCH)).click();
         device.wait(Until.findObject(By.res(index+IB_QR_SCAN)),5000);
@@ -39,6 +42,7 @@ public class gameCenterPageClick extends autoTestBase{
         device.wait(Until.findObject(By.res(index+PICTURE_CHECK)),5000);
         device.findObject(By.res(index+PICTURE_CHECK)).click();
         device.findObject(By.res(index+CONFIRN_BTN)).click();
+        Thread.sleep(5000);
         boolean a = new Boolean(device.hasObject(By.res(index+TV_NAME)));
         if (a == true){
             device.pressBack();
@@ -52,29 +56,35 @@ public class gameCenterPageClick extends autoTestBase{
         device.findObject(By.res(index+M4399_MENU_SAVE)).click();
         Thread.sleep(2000);
         device.pressBack();
+        device.pressBack();
+
     }
     //插件下载安装
     @Test
     public void pluginInstall() throws IOException, InterruptedException, UiObjectNotFoundException {
         restartApp();
         device.findObject(By.res(index+TV_TAB_TITLE).text("直播")).click();
-        device.wait(Until.findObject(By.res(index+LIVE_TITLE_NAME)),5000);
+        device.wait(Until.findObject(By.res(index+LIVE_TITLE_NAME)),10000);
         device.findObject(By.res(index+TV_TAG_NAME).text("全部直播")).click();
-        device.wait(Until.findObject(By.res(index+IV_OPEN_LIVE_ALL_CATEGORY)),5000);
+        device.wait(Until.findObject(By.res(index+IV_OPEN_LIVE_ALL_CATEGORY)),10000);
         device.findObject(By.res(index+IV_LIVE_PICTURE)).click();
-        device.wait(Until.findObject(By.res("com.m4399.gamecenter.plugin.livetv:id/ibtn_gift")),50000);
+        device.wait(Until.findObject(By.res("com.m4399.gamecenter.plugin.livetv:id/ibtn_gift")),10000);
+        device.pressBack();
         restartApp();
-        device.findObject(new UiSelector().resourceId(index+IV_TAB_ICON).instance(4)).click();
-        device.wait(Until.findObject(By.res(index+TV_HEBI_RECHARGE)),5000);
+        tabClickMy();
+        device.wait(Until.findObject(By.res(index+TV_HEBI_RECHARGE)),1000);
         device.findObject(By.res(index+TV_HEBI_RECHARGE)).click();
-        device.wait(Until.findObject(By.res("com.m4399.gamecenter.plugin.recharge:id/m4399_gdui_billing_btn_text")),50000);
+        device.wait(Until.findObject(By.res("com.m4399.gamecenter.plugin.recharge:id/m4399_gdui_billing_btn_text")),10000);
+        device.pressBack();
         restartApp();
-        device.findObject(new UiSelector().resourceId(index+IV_TAB_ICON).instance(4)).click();
-        device.wait(Until.findObject(By.res(index+TV_MENU_NAME).text("赚零花钱")),5000);
+        tabClickMy();
+        Thread.sleep(2000);
+        device.wait(Until.findObject(By.res(index+TV_MENU_NAME).text("赚零花钱")),10000);
         device.findObject(By.res(index+TV_MENU_NAME).text("赚零花钱")).click();
-        device.wait(Until.findObject(By.res(index+MAKE_MONEY_LIST_CELL_TITLE)),5000);
+        device.wait(Until.findObject(By.res(index+MAKE_MONEY_LIST_CELL_TITLE)),10000);
         device.findObject(By.res(index+MAKE_MONEY_LIST_CELL_TITLE).text("试玩单机游戏赚盒币")).click();
-        device.wait(Until.findObject(By.res("com.m4399.gamecenter.plugin.jfq:id/txt_appName")),50000);
+        device.wait(Until.findObject(By.res("com.m4399.gamecenter.plugin.jfq:id/txt_appName")),10000);
+        device.pressBack();
     }
     //游戏下载
     @Test
@@ -114,4 +124,35 @@ public class gameCenterPageClick extends autoTestBase{
         }
 
     }
+    //添加自定义表情200张
+    @Test
+    public void customizePicture() throws  IOException, InterruptedException {
+        restartApp();
+        tabClickMy();
+        device.findObject(By.res("com.m4399.gamecenter:id/btn_shop")).click();
+        device.wait(Until.findObject(By.desc("更多选项")),10000);
+        device.findObject(By.desc("更多选项")).click();
+        device.wait(Until.findObject(By.res("com.m4399.gamecenter:id/title").text("我的表情")),10000);
+        device.findObject(By.res("com.m4399.gamecenter:id/title").text("我的表情")).click();
+        device.wait(Until.findObject(By.res("com.m4399.gamecenter:id/tv_tab_title").text("自定义表情")),10000);
+        device.findObject(By.res("com.m4399.gamecenter:id/tv_tab_title").text("自定义表情")).click();
+        UiObject2 picEidtButton = device.findObject(By.res("com.m4399.gamecenter:id/m4399_menu_message_edit"));
+        boolean picEdit = picEidtButton.isEnabled();
+        if (picEdit == true){
+            device.findObject(By.res("com.m4399.gamecenter:id/m4399_menu_message_edit")).click();
+            device.wait(Until.findObject(By.res("com.m4399.gamecenter:id/message_control_checkbox")),10000);
+            device.findObject(By.res("com.m4399.gamecenter:id/message_control_checkbox")).click();
+            device.findObject(By.res("com.m4399.gamecenter:id/messageDeleteButton")).click();
+            Thread.sleep(5000);
+        }
+        for (int i = 0; i < 200; i++) {
+            UiObject2 addButtom = device.findObject(By.res("com.m4399.gamecenter:id/iv_icon"));
+            addButtom.click();
+            device.wait(Until.findObject(By.res("com.m4399.gamecenter:id/pic_check")),10000);
+            device.findObject(By.res("com.m4399.gamecenter:id/pic_check")).click();
+            UiObject2 confirm = device.findObject(By.res("com.m4399.gamecenter:id/confirm_btn"));
+            confirm.clickAndWait(Until.newWindow(),10000);
+            device.wait(Until.gone(By.res("com.m4399.gamecenter:id/mLoadingText")),10000);
+        }
     }
+}
