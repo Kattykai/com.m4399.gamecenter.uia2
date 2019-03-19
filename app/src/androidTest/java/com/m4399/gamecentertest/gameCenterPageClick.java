@@ -2,13 +2,12 @@ package com.m4399.gamecentertest;
 
 import android.graphics.Point;
 import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
-import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
-import android.webkit.WebView;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -19,6 +18,10 @@ public class gameCenterPageClick extends autoTestBase{
     //非插件版本：com.m4399.gamecenter
     //主插件版本：com.m4399.gamecenter.plugin.main
     public String index = "com.m4399.gamecenter";
+    @Before
+    public void setUp(){
+
+    }
     @Test
     public void homePage() throws IOException, InterruptedException {
         restartApp();
@@ -118,9 +121,9 @@ public class gameCenterPageClick extends autoTestBase{
     }
     @Test
     public void videoslide() throws InterruptedException {
-        for (int i = 1;i<200;i++){
+        for (int i = 1;i<50;i++){
             device.swipe(1090,2000,1090,600,20);
-            Thread.sleep(5000);
+            Thread.sleep(6000);
         }
 
     }
@@ -154,5 +157,9 @@ public class gameCenterPageClick extends autoTestBase{
             confirm.clickAndWait(Until.newWindow(),10000);
             device.wait(Until.gone(By.res("com.m4399.gamecenter:id/mLoadingText")),10000);
         }
+    }
+    @After
+    public void tearDown(){
+
     }
 }
