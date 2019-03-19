@@ -1,7 +1,6 @@
 package com.m4399.gamecentertest;
 
 import android.app.Instrumentation;
-import android.os.health.SystemHealthManager;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
@@ -12,7 +11,6 @@ import android.support.test.uiautomator.UiScrollable;
 import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.UiWatcher;
 import android.support.test.uiautomator.Until;
-import android.util.Log;
 
 import org.junit.runner.RunWith;
 
@@ -47,7 +45,7 @@ public class autoTestBase extends gameCenterStr{
             }
         });
     }
-    //tab点击
+    //找游戏tab点击
     public void tabClickHome(){
         UiObject2 tabObject = device.findObject(By.res("com.m4399.gamecenter:id/ctl_indicator"));
         int a = tabObject.getVisibleBounds().top;
@@ -57,7 +55,7 @@ public class autoTestBase extends gameCenterStr{
         device.click((d-c)/10,(b-a)/2+a);
         device.wait(Until.findObject(By.res("com.m4399.gamecenter:id/iv_tag_icon")),1000);
     }
-
+    //动态tab点击
     public  void tabClickZone(){
         UiObject2 tabObject = device.findObject(By.res("com.m4399.gamecenter:id/ctl_indicator"));
         int a = tabObject.getVisibleBounds().top;
@@ -67,7 +65,7 @@ public class autoTestBase extends gameCenterStr{
         device.click((d-c)*3/10,(b-a)/2+a);
         device.wait(Until.findObject(By.res("com.m4399.gamecenter:id/zone_list_header_family")),1000);
     }
-
+    //游戏圈tab点击
     public  void tabClickQuan(){
         UiObject2 tabObject = device.findObject(By.res("com.m4399.gamecenter:id/ctl_indicator"));
         int a = tabObject.getVisibleBounds().top;
@@ -77,7 +75,7 @@ public class autoTestBase extends gameCenterStr{
         device.click((d-c)*5/10,(b-a)/2+a);
         device.wait(Until.findObject(By.res("com.m4399.gamecenter:id/tv_post_title")),1000);
     }
-
+    //广场tab点击
     public  void tabClickSquare(){
         UiObject2 tabObject = device.findObject(By.res("com.m4399.gamecenter:id/ctl_indicator"));
         int a = tabObject.getVisibleBounds().top;
@@ -87,7 +85,7 @@ public class autoTestBase extends gameCenterStr{
         device.click((d-c)*7/10,(b-a)/2+a);
         device.wait(Until.findObject(By.res("com.m4399.gamecenter:id/tv_view_all")),1000);
     }
-
+    //我tab点击
     public  void tabClickMy(){
         UiObject2 tabObject = device.findObject(By.res("com.m4399.gamecenter:id/ctl_indicator"));
         int a = tabObject.getVisibleBounds().top;
