@@ -2,8 +2,11 @@ package com.m4399.gamecentertest;
 
 import android.graphics.Point;
 import android.support.test.uiautomator.By;
+import android.support.test.uiautomator.BySelector;
+import android.support.test.uiautomator.UiCollection;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
+import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
 
 import org.junit.After;
@@ -151,7 +154,7 @@ public class gameCenterPageClick extends autoTestBase{
         for (int i = 0; i < 200; i++) {
             UiObject2 addButtom = device.findObject(By.res("com.m4399.gamecenter:id/iv_icon"));
             addButtom.click();
-            device.wait(Until.findObject(By.res("com.m4399.gamecenter:id/pic_check")),10000);
+            device.wait(Until.findObject(By.res("com.m4399.gamecenter:id/pic_check")), 10000);
             device.findObject(By.res("com.m4399.gamecenter:id/pic_check")).click();
             UiObject2 confirm = device.findObject(By.res("com.m4399.gamecenter:id/confirm_btn"));
             confirm.clickAndWait(Until.newWindow(),10000);
