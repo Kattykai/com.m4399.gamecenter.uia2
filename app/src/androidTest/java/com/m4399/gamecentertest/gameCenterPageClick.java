@@ -10,10 +10,13 @@ import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+
+import javax.crypto.spec.DESedeKeySpec;
 
 public class gameCenterPageClick extends autoTestBase{
     //resourceID配置
@@ -160,6 +163,48 @@ public class gameCenterPageClick extends autoTestBase{
             confirm.clickAndWait(Until.newWindow(),10000);
             device.wait(Until.gone(By.res("com.m4399.gamecenter:id/mLoadingText")),10000);
         }
+    }
+    @Test
+    public void sendZone() throws IOException, InterruptedException {
+        restartApp();
+        tabClickZone();
+        UiObject2 aobject = device.findObject(By.res("clickAndWait()"));
+        device.findObject(By.res("com.m4399.gamecenter:id/iv_menu_item_publish")).click();
+        device.wait(Until.findObject(By.res("com.m4399.gamecenter:id/m4399_topic_publish")),10000);
+
+    }
+    //发送动态
+    @Test
+    public void zoneSend() throws IOException, InterruptedException {
+        errorHandleAdd("perssionCheck","android:id/button1");
+        restartApp();
+        tabClickZone();
+        String zoneRandom = getRandomString(5);
+        device.findObject(By.res("com.m4399.gamecenter:id/iv_menu_item_publish")).clickAndWait(Until.newWindow(),10000);
+        device.wait(Until.findObject(By.res("com.m4399.gamecenter:id/zone_edit")),10000);
+        device.findObject(By.res("com.m4399.gamecenter:id/zone_edit")).setText("今天天气真不错呢"+zoneRandom);
+        device.findObject(By.res("com.m4399.gamecenter:id/add_image")).clickAndWait(Until.newWindow(),10000);
+        device.wait(Until.findObject(By.res("com.m4399.gamecenter:id/camera_btn")),10000);
+        device.findObject(By.res("com.m4399.gamecenter:id/camera_btn")).clickAndWait(Until.newWindow(),10000);
+        device.wait(Until.findObject(By.res("com.android.camera:id/v9_shutter_button_internal")),1000);
+        device.findObject(By.res("com.android.camera:id/v9_shutter_button_internal")).click();
+        device.wait(Until.findObject(By.res("com.android.camera:id/inten_done_apply")),10000);
+        device.findObject(By.res("com.android.camera:id/inten_done_apply")).clickAndWait(Until.newWindow(),10000);
+        device.findObject(By.res("com.m4399.gamecenter:id/m4399_topic_publish")).click();
+        device.wait(Until.findObject(By.res("com.m4399.gamecenter:id/zone_del_btn")),10000);
+        if (device.hasObject(By.res("com.m4399.gamecenter:id/tv_send_fail_notice").text("发送中"))){
+            device.wait(Until.gone(By.res("com.m4399.gamecenter:id/tv_send_fail_notice").text("发送中")),10000);
+        }
+        tabClickMy();
+        device.findObject(By.res("com.m4399.gamecenter:id/uiv_circle_view")).clickAndWait(Until.newWindow(),10000);
+        device.wait(Until.findObject(By.res("com.m4399.gamecenter:id/tv_tab_title")),10000);
+        device.findObject(By.res("com.m4399.gamecenter:id/tv_tab_title").text("动态")).click();
+        device.wait(Until.findObject(By.res("com.m4399.gamecenter:id/zone_feel")),10000);
+        Assert.assertTrue("zoneSendSuccess",device.hasObject(By.res("com.m4399.gamecenter:id/zone_feel").text("今天天气真不错呢"+zoneRandom)));
+    }
+    @Test
+    public void textdemo(){
+        device.findObject(By.res("com.m4399.gamecenter:id/tv_tab_title").text("帖子")).click();
     }
     @After
     public void tearDown(){

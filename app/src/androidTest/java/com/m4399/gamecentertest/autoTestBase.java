@@ -11,10 +11,12 @@ import android.support.test.uiautomator.UiScrollable;
 import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.UiWatcher;
 import android.support.test.uiautomator.Until;
+import android.util.Log;
 
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
+import java.util.Random;
 
 @RunWith(AndroidJUnit4.class)
 public class autoTestBase extends gameCenterStr{
@@ -39,7 +41,13 @@ public class autoTestBase extends gameCenterStr{
             @Override
             public boolean checkForCondition() {
                 if (device.hasObject(By.res(res_register))){
-                    device.findObject(By.res(res_register)).click();
+                    device.findObject(By.res(res_register)).clickAndWait(Until.newWindow(),10000);
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    Log.i("UiWatcher","监听器已触发");
                 }
                 return false;
             }
@@ -86,7 +94,7 @@ public class autoTestBase extends gameCenterStr{
         device.wait(Until.findObject(By.res("com.m4399.gamecenter:id/tv_view_all")),1000);
     }
     //我tab点击
-    public  void tabClickMy(){
+    public void tabClickMy(){
         UiObject2 tabObject = device.findObject(By.res("com.m4399.gamecenter:id/ctl_indicator"));
         int a = tabObject.getVisibleBounds().top;
         int b = tabObject.getVisibleBounds().bottom;
@@ -94,5 +102,16 @@ public class autoTestBase extends gameCenterStr{
         int d = tabObject.getVisibleBounds().right;
         device.click((d-c)*9/10,(b-a)/2+a);
         device.wait(Until.findObject(By.res("com.m4399.gamecenter:id/tv_menu_logo")),1000);
+    }
+    //获取随机字符
+    public static String getRandomString(int length){
+        String str="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        Random random=new Random();
+        StringBuffer sb=new StringBuffer();
+        for(int i=0;i<length;i++){
+            int number=random.nextInt(62);
+            sb.append(str.charAt(number));
+        }
+        return sb.toString();
     }
 }
