@@ -176,31 +176,31 @@ public class gameCenterPageClick extends autoTestBase{
     //发送动态
     @Test
     public void zoneSend() throws IOException, InterruptedException {
-        errorHandleAdd("perssionCheck","android:id/button1");
-        restartApp();
-        tabClickZone();
-        String zoneRandom = getRandomString(5);
-        device.findObject(By.res("com.m4399.gamecenter:id/iv_menu_item_publish")).clickAndWait(Until.newWindow(),10000);
-        device.wait(Until.findObject(By.res("com.m4399.gamecenter:id/zone_edit")),10000);
-        device.findObject(By.res("com.m4399.gamecenter:id/zone_edit")).setText("今天天气真不错呢"+zoneRandom);
-        device.findObject(By.res("com.m4399.gamecenter:id/add_image")).clickAndWait(Until.newWindow(),10000);
-        device.wait(Until.findObject(By.res("com.m4399.gamecenter:id/camera_btn")),10000);
-        device.findObject(By.res("com.m4399.gamecenter:id/camera_btn")).clickAndWait(Until.newWindow(),10000);
-        device.wait(Until.findObject(By.res("com.android.camera:id/v9_shutter_button_internal")),1000);
-        device.findObject(By.res("com.android.camera:id/v9_shutter_button_internal")).click();
-        device.wait(Until.findObject(By.res("com.android.camera:id/inten_done_apply")),10000);
-        device.findObject(By.res("com.android.camera:id/inten_done_apply")).clickAndWait(Until.newWindow(),10000);
-        device.findObject(By.res("com.m4399.gamecenter:id/m4399_topic_publish")).click();
-        device.wait(Until.findObject(By.res("com.m4399.gamecenter:id/zone_del_btn")),10000);
+        errorHandleAdd("perssionCheck","android:id/button1");//注册监听器
+        restartApp();//重启APP
+        tabClickZone();//点击动态模块
+        String zoneRandom = getRandomString(5);//增加随机字符串
+        device.findObject(By.res("com.m4399.gamecenter:id/iv_menu_item_publish")).clickAndWait(Until.newWindow(),10000);//点击发动态按钮并等待新窗口出现
+        device.wait(Until.findObject(By.res("com.m4399.gamecenter:id/zone_edit")),10000);//等待找到动态编辑窗口进行下一步
+        device.findObject(By.res("com.m4399.gamecenter:id/zone_edit")).setText("今天天气真不错呢"+zoneRandom);//输入文本内容"今天天气真不错呢"+随机字符，防止发重复动态
+        device.findObject(By.res("com.m4399.gamecenter:id/add_image")).clickAndWait(Until.newWindow(),10000);//点击添加图片按钮并等待新窗口出现
+        device.wait(Until.findObject(By.res("com.m4399.gamecenter:id/camera_btn")),10000);//等待找到拍照按钮
+        device.findObject(By.res("com.m4399.gamecenter:id/camera_btn")).clickAndWait(Until.newWindow(),10000);//点击拍照按钮
+        device.wait(Until.findObject(By.res("com.android.camera:id/v9_shutter_button_internal")),1000);//等待出现相机快门按钮
+        device.findObject(By.res("com.android.camera:id/v9_shutter_button_internal")).click();//点击相机快门按钮
+        device.wait(Until.findObject(By.res("com.android.camera:id/inten_done_apply")),10000);//等待找到√按钮
+        device.findObject(By.res("com.android.camera:id/inten_done_apply")).clickAndWait(Until.newWindow(),10000);//点击√按钮
+        device.findObject(By.res("com.m4399.gamecenter:id/m4399_topic_publish")).click();//点击发布按钮
+        device.wait(Until.findObject(By.res("com.m4399.gamecenter:id/zone_del_btn")),10000);//点击发布后等待页面出现动态删除按钮，即返回到动态列表页面
         if (device.hasObject(By.res("com.m4399.gamecenter:id/tv_send_fail_notice").text("发送中"))){
             device.wait(Until.gone(By.res("com.m4399.gamecenter:id/tv_send_fail_notice").text("发送中")),10000);
-        }
-        tabClickMy();
-        device.findObject(By.res("com.m4399.gamecenter:id/uiv_circle_view")).clickAndWait(Until.newWindow(),10000);
-        device.wait(Until.findObject(By.res("com.m4399.gamecenter:id/tv_tab_title")),10000);
-        device.findObject(By.res("com.m4399.gamecenter:id/tv_tab_title").text("动态")).click();
-        device.wait(Until.findObject(By.res("com.m4399.gamecenter:id/zone_feel")),10000);
-        Assert.assertTrue("zoneSendSuccess",device.hasObject(By.res("com.m4399.gamecenter:id/zone_feel").text("今天天气真不错呢"+zoneRandom)));
+        }//在动态tab上判断，如果有发布中状态，则等待发布中状态消失后进行下一步
+        tabClickMy();//点击我tab
+        device.findObject(By.res("com.m4399.gamecenter:id/uiv_circle_view")).clickAndWait(Until.newWindow(),10000);//点击头像进入个人主页
+        device.wait(Until.findObject(By.res("com.m4399.gamecenter:id/tv_tab_title")),10000);//等待加载个人主页出现tab数据
+        device.findObject(By.res("com.m4399.gamecenter:id/tv_tab_title").text("动态")).click();//点击动态tab切换到动态tab
+        device.wait(Until.findObject(By.res("com.m4399.gamecenter:id/zone_feel")),10000);//等待加载出动态列表
+        Assert.assertTrue("zoneSendSuccess",device.hasObject(By.res("com.m4399.gamecenter:id/zone_feel").text("今天天气真不错呢"+zoneRandom)));//断言刚才发布的动态是否存在列表中
     }
     @Test
     public void textdemo(){
