@@ -2,11 +2,8 @@ package com.m4399.gamecentertest;
 
 import android.graphics.Point;
 import android.support.test.uiautomator.By;
-import android.support.test.uiautomator.BySelector;
-import android.support.test.uiautomator.UiCollection;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.UiObjectNotFoundException;
-import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
 
 import org.junit.After;
@@ -15,8 +12,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-
-import javax.crypto.spec.DESedeKeySpec;
 
 public class gameCenterPageClick extends autoTestBase{
     //resourceID配置
@@ -154,7 +149,7 @@ public class gameCenterPageClick extends autoTestBase{
             device.findObject(By.res("com.m4399.gamecenter:id/messageDeleteButton")).click();
             Thread.sleep(5000);
         }
-        for (int i = 0; i < 200; i++) {
+        for (int i = 0; i <= 200; i++) {
             UiObject2 addButtom = device.findObject(By.res("com.m4399.gamecenter:id/iv_icon"));
             addButtom.click();
             device.wait(Until.findObject(By.res("com.m4399.gamecenter:id/pic_check")), 10000);
