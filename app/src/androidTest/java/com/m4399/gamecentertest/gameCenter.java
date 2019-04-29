@@ -91,7 +91,7 @@ public class gameCenter extends  autoTestBase{
 //        UiObject downbutton = new UiObject(new UiSelector().resourceId("com.m4399.gamecenter:id/downloadButton").instance(2));
 //        downbutton.click();
     }
-        @After
+     @After
     public void tearDown() throws IOException {
 
     }
